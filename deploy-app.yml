@@ -1,0 +1,30 @@
+# Create a GitHub action to email a report from a file at 6 a.m. daily.
+# ========================================================================
+name: Email Report
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 6 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Email Report
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MY_USERNAME }}
+          password: ${{ secrets.MY_PASSWORD }}
+          subject: 'Report for ${GITHUB_REPOSITORY}'
+          body: 'Report attached.'
+          to: ${{ secrets.MY_EMAIL }}
+          from: ${{ secrets.MY_USERNAME }}
+          attachments: 'deploy-app.log'
+          content_type: 'text/plain'
+```
+
+## License
+
+The scripts and documentation in this project are released under the [MIT License](LICENSE)
