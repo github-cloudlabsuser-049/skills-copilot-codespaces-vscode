@@ -1,14 +1,13 @@
+# Login to Azure
+Connect-AzAccount
+
+# Set variables
 $resourceGroupName = "myResourceGroup"
-$location = "eastus"
+$location = "westeurope"
 $storageAccountName = "mystorageaccount"
 
-# Create a new resource group
+# Create a resource group
 New-AzResourceGroup -Name $resourceGroupName -Location $location
 
-# Create a new storage account
-New-AzStorageAccount `
-  -ResourceGroupName $resourceGroupName `
-  -Name $storageAccountName `
-  -Location $location `
-  -SkuName Standard_LRS `
-  -Kind StorageV2
+# Create a storage account
+New-AzStorageAccount -ResourceGroupName $resourceGroupName -Name $storageAccountName -Location $location -SkuName Standard_LRS
